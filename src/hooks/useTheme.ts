@@ -24,11 +24,15 @@ export const useTheme = () => {
     });
 
      const getTableClasses = () => ({
-         table: currentTheme === 'dark' ? 'text-secondary' : 'text-primary',
-         tableHeader: currentTheme === 'dark' ? 'bg-gray-800' : 'bg-gray-100',
-         tableHeaderCell: currentTheme === 'dark' ? 'text-secondary' : 'text-primary',
-         tableRow: currentTheme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-50',
-         tableCell: currentTheme === 'dark' ? 'text-secondary' : 'text-primary',
+         table: `responsive-table w-full min-w-full ${currentTheme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`,
+         tableHeader: currentTheme === 'dark' ? 'bg-gray-800' : 'bg-gray-50',
+         tableHeaderCell: `px-6 py-4 text-left font-semibold text-sm align-middle border-b border-gray-200 ${currentTheme === 'dark' ? 'text-gray-200 border-gray-700' : 'text-gray-700 border-gray-200'}`,
+         tableBody: 'text-sm',
+         tableRow: `border-b border-gray-200 ${currentTheme === 'dark' ? 'hover:bg-gray-700 border-gray-700' : 'hover:bg-gray-50 border-gray-100'} transition-colors duration-150`,
+         tableCell: `px-6 py-4 align-middle relative ${currentTheme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`,
+         pagination: `px-6 py-4 bg-gray-50 ${currentTheme === 'dark' ? 'bg-gray-800 border-t border-gray-700' : 'bg-gray-50 border-t border-gray-200'}`,
+         tableContainer: 'rounded-lg shadow-lg border overflow-hidden',
+         tableWrapper: 'overflow-x-auto',
      });
 
     return {

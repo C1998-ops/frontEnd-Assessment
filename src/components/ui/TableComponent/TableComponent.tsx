@@ -38,7 +38,6 @@ type DataTableProps<T> = {
 function DataTable<T>({
   columns,
   data,
-  searchQuery,
   loading = false, // Local loading state
   pagination,
   onAction,

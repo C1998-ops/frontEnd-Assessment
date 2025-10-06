@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,7 +8,6 @@ import Button from "../components/ui/Button";
 import { testAccounts } from "../constants/testAccounts";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { loginTestAccount } from "../store/slices/authSlice";
-import { type User } from "../constants/types";
 // import Logo from '../assets/logo.png'; // You'll need to add this logo
 
 interface LoginFormValues {

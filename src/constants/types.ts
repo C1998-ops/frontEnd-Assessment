@@ -114,25 +114,156 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
   helperText?: string;
 }
 export interface TableColumn<T = any> {
-	key: keyof T | string;
-	header: string;
-	width?: string;
-	render?: (value: any, row: T, index: any, onAction?: (...args: any[]) => void) => React.ReactNode;
-	sortable?: boolean;
-	filterable?: boolean;
-	align?: 'left' | 'center' | 'right';
-	className?: string;
-	headerClassName?: string;
-	filter?: {
-		type: 'text' | 'select' | 'date';
-		options?: Array<string>;
-		placeholder?: string;
-	};
-	headerRender?: () => React.ReactNode;
+  key: keyof T | string;
+  header: string;
+  width?: string;
+  render?: (value: any, row: T, index: any, onAction?: (...args: any[]) => void) => React.ReactNode;
+  sortable?: boolean;
+  filterable?: boolean;
+  align?: 'left' | 'center' | 'right';
+  className?: string;
+  headerClassName?: string;
+  filter?: {
+    type: 'text' | 'select' | 'date';
+    options?: Array<string>;
+    placeholder?: string;
+  };
+  headerRender?: () => React.ReactNode;
 }
 
 export interface ExpandableRowConfig<T = any> {
-	isExpanded: (row: T) => boolean;
-	expandedRowRenderer: (row: T) => React.ReactNode;
-	onToggleExpanded: (row: T) => void;
+  isExpanded: (row: T) => boolean;
+  expandedRowRenderer: (row: T) => React.ReactNode;
+  onToggleExpanded: (row: T) => void;
+}
+
+export type FormFieldType =
+  | 'text'
+  | 'email'
+  | 'password'
+  | 'number'
+  | 'select'
+  | 'radio'
+  | 'checkbox'
+  | 'textarea'
+  | 'composite'
+  | 'section'
+  | 'multiselect'
+  | 'file'
+  | 'composite-address'
+  | 'composite-row'
+  | 'new-custom-composite'
+  | 'composite-csv'
+  | 'link'
+  | 'date'
+  | 'button'
+  | 'custom-location-handler'
+  | 'custom-eligibility-handler'
+  | 'list'
+  | 'businessHours'
+  | 'tel'
+  | 'grouped-list'
+  | 'independent-list';
+
+export type FormInputValue =
+  | string
+  | number
+  | boolean
+  | Record<string, any>
+  | {
+    [key: `eligibility_questions[${number}].question_text`]: string;
+    [key: `eligibility_questions[${number}].question_answer`]: string;
+  }
+  | string[]
+  | any[]
+  | undefined;
+export type ValidationRule = {
+  checkDuplicate?: {
+    message: string;
+  };
+  pattern?: {
+    value: RegExp | boolean | string;
+    message: string;
+  };
+  matchesName?: {
+    message: string;
+  };
+  phoneValidation?: {
+    message: string;
+  };
+  min?: {
+    value: number;
+    message: string;
+  };
+  max?: {
+    value: number;
+    message: string;
+  };
+  length?: {
+    value: number;
+    message: string;
+  };
+  date?: {
+    message: string
+  }
+};
+export interface RadioOptions {
+  label: string;
+  value: string | boolean;
+}
+export const LayoutTypes = {
+  KEY_VALUE: 'key-value',
+  TEXT: 'text',
+  DEFAULT: 'default',
+} as const;
+
+export type LayoutTypes = typeof LayoutTypes[keyof typeof LayoutTypes];
+//for field types in OptionConfig
+export interface FieldTypes {
+  key: string;
+  valuePath: string;
+  type?: FormFieldType | string;
+  fields?: FormField[];
+  options?: RadioOptions[] | string[];
+  iconPath?: React.ReactNode | React.FC<any> | string;
+  displayText?: string;
+  label?: string;
+  name?: string;
+  isTitle?: boolean;
+  defaultValue?: any;
+  required?: boolean;
+  placeholder?: string;
+  layout?: LayoutTypes;
+  editable?: boolean;
+  primaryField?: string; // For grouped-list fields to determine visibility
+  conditionalField?: boolean; // Marks a field as controlling visibility of other fields
+  showWhen?: string; // Path to the field that controls visibility
+  showWhenValue?: string | boolean; // Value that should trigger showing this field0
+  clearAllOnFalse?: boolean; // Clear dependent field values when controlling field is false
+  validation?: ValidationRule;
+  renderAsText?: boolean; // Indicates if field should be rendered as single text line instead of bullet points
+  inputMask?: string;
+}
+export interface FormField {
+  name?: string;
+  label?: string | JSX.Element;
+  group?: string; // For grouping fields together,
+  value?: string | number | boolean | Record<string, any>;
+  type?: FormFieldType;
+  placeholder?: string;
+  options?: Array<{ label: string; value: string }>; // Use `any` if the options can have a dynamic structure
+  required?: boolean;
+  fields?: FormField[] | undefined; // For composite fields, like address or name,
+  layout?: string; // For layout purposes, like grid or flex
+  [key: string]: any; // For additional properties
+  formErrors?: string | null; // For error messages
+  component?: React.FC; // For custom components,
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // For handling changes
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void; // For handling blur events
+  key?: string | number | undefined;
+  className?: string | undefined;
+  day_of_week?: string; //only for business hours table
+  readOnly?: boolean;
+  validation?: ValidationRule;
+  renderAsText?: boolean; // Indicates if field should be rendered as single text line instead of bullet points
 }

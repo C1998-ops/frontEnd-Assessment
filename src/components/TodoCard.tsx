@@ -1,5 +1,5 @@
 import React from 'react';
-import { Todo } from '../constants/types';
+import { type Todo } from '../constants/types';
 import { Button } from './ui';
 
 interface TodoCardProps {

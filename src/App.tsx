@@ -25,7 +25,7 @@ function AppContent() {
   return (
     <div className={theme === "dark" ? "dark" : ""}>
       <ToastProvider>
-        <Router>
+        <Router basename="/frontEnd/Assessment/">
           <div className="App min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
             <Routes>
               {/* Public routes */}
@@ -48,11 +48,7 @@ function AppContent() {
                 <Route
                   key={route.path}
                   path={route.path}
-                  element={
-                    <ProtectedRoute>
-                      {route.element}
-                    </ProtectedRoute>
-                  }
+                  element={<ProtectedRoute>{route.element}</ProtectedRoute>}
                 >
                   {route.children?.map((child) => (
                     <Route
@@ -68,6 +64,16 @@ function AppContent() {
               {/* Default redirect */}
               <Route
                 path="/"
+                element={
+                  isAuthenticated ? (
+                    <Navigate to="/dashboard" replace />
+                  ) : (
+                    <Navigate to="/login" replace />
+                  )
+                }
+              />
+              <Route
+                path="*"
                 element={
                   isAuthenticated ? (
                     <Navigate to="/dashboard" replace />

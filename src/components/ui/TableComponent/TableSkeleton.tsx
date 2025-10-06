@@ -9,7 +9,6 @@ interface TableSkeletonProps {
 
 const TableSkeleton: React.FC<TableSkeletonProps> = ({
 	rows = 10,
-	columns = 4,
 	showHeader = true,
 	className = '',
 }) => {
