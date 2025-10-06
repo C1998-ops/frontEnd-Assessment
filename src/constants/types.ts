@@ -244,9 +244,11 @@ export interface FieldTypes {
   renderAsText?: boolean; // Indicates if field should be rendered as single text line instead of bullet points
   inputMask?: string;
 }
+import React from 'react';
+
 export interface FormField {
   name?: string;
-  label?: string | JSX.Element;
+  label?: string | React.ReactElement;
   group?: string; // For grouping fields together,
   value?: string | number | boolean | Record<string, any>;
   type?: FormFieldType;

@@ -103,9 +103,7 @@ export function getValue(
 	data: any,
 	field: FieldTypes,
 	source: string = "display",
-	defaultValue: any = "",
-	states: any[] = [],
-	stateFieldKey: string = 'stateId'
+  defaultValue: any = "",
 ): string | boolean | any[] {
 	let valuePath = field.valuePath;
 	if (field.key === 'insuranceProviders' || field.key === 'insuranceProviderIds') {

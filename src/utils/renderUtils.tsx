@@ -259,7 +259,7 @@ export function renderValue(
 
   // Handle list type fields - always use renderListValues for consistent list rendering
   if (fieldType === "list") {
-    return renderListValues(field, value, theme);
+    return renderListValues(value, theme);
   }
 
   // Show arrays as tags
@@ -348,7 +348,7 @@ export function renderValue(
  * 5. Clear intent: Theme names are more descriptive than boolean flags
  */
 function renderListValues(
-  field: FieldTypes,
+  // field: FieldTypes,
   value: any,
   theme: "default" | "storyboard" | "compact" = "default"
 ): React.JSX.Element {
