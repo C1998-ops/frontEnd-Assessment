@@ -25,7 +25,7 @@ function AppContent() {
   return (
     <div className={theme === "dark" ? "dark" : ""}>
       <ToastProvider>
-        <Router basename="/frontEnd/Assessment/">
+        <Router basename={"/frontEnd-Assessment"}>
           <div className="App min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
             <Routes>
               {/* Public routes */}

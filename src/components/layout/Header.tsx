@@ -91,10 +91,14 @@ const TopNav: React.FC<TopNavProps> = ({
     <div
       className={`sticky top-0 left-0 w-full bg-white border-b border-gray-200 shadow-sm z-50 ${themeStyles.container.backgroundColor}`}
     >
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div
+        className={`max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-3 transition-all duration-300 ${
+          _isSidebarOpen ? "lg:ml-64" : "lg:ml-24"
+        }`}
+      >
         <button
           onClick={toggleSidebar}
-          className={`absolute top-1/4 left-24 text-primary-navy p-2 rounded-md hover:bg-gray-100 ${themeStyles.primary.color}`}
+          className={`absolute top-1/4 text-primary-navy p-2 rounded-md hover:bg-gray-100 transition-all duration-300 left-4 ${themeStyles.primary.color}`}
           aria-label="Toggle sidebar"
         >
           <FaBars size={18} />
@@ -112,7 +116,7 @@ const TopNav: React.FC<TopNavProps> = ({
               />
             </div>
             <div className="mt-2 md:mt-3">
-              <nav className="flex gap-2 sm:gap-4 overflow-x-auto no-scrollbar">
+              <nav className="flex gap-2 sm:gap-4 overflow-x-auto">
                 {basicMenuItems.map((item) => {
                   return (
                     <button

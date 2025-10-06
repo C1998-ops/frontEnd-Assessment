@@ -7,5 +7,5 @@ export default defineConfig({
   css: {
     postcss: './postcss.config.js',
   },
-  base: '/frontEnd/Assessment/',
+  base: '/frontEnd-Assessment',
 })
