@@ -92,78 +92,140 @@ const TopNav: React.FC<TopNavProps> = ({
       className={`sticky top-0 left-0 w-full bg-white border-b border-gray-200 shadow-sm z-50 ${themeStyles.container.backgroundColor}`}
     >
       <div
-        className={`max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-3 transition-all duration-300 ${
+        className={`max-w-screen-xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3 transition-all duration-300 ${
           _isSidebarOpen ? "lg:ml-64" : "lg:ml-24"
         }`}
       >
-        <button
-          onClick={toggleSidebar}
-          className={`absolute top-1/4 text-primary-navy p-2 rounded-md hover:bg-gray-100 transition-all duration-300 left-4 ${themeStyles.primary.color}`}
-          aria-label="Toggle sidebar"
-        >
-          <FaBars size={18} />
-        </button>
-        <div className="w-full flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          {/* Left: Breadcrumb + Nav */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2">
-              {/* Global hamburger to toggle sidebar */}
-              <Breadcrumb
-                items={
-                  basicBreadcrumbs[currentPath] || basicBreadcrumbs.dashboard
-                }
-                className={`mr-3 ${themeStyles.text.color}`}
-              />
-            </div>
-            <div className="mt-2 md:mt-3">
-              <nav className="flex gap-2 sm:gap-4 overflow-x-auto">
-                {basicMenuItems.map((item) => {
-                  return (
-                    <button
-                      key={item.path}
-                      onClick={() => navigate(item.path)}
-                      className={`hover:text-primary border-b-2 border-secondary whitespace-nowrap text-xs lg:text-base pb-1 px-1 sm:px-2 ${
-                        themeStyles.primary.color
-                      } ${
-                        isTopNavItemActive(item.path)
-                          ? `border-opacity-50 ${themeStyles.primary.color} font-semibold`
-                          : `border-opacity-35 text-gray-500`
-                      }`}
-                    >
-                      {item.label}
-                    </button>
-                  );
-                })}
-              </nav>
-            </div>
-          </div>
-
-          {/* Right: Actions */}
-          <div className="flex items-center gap-3 flex-shrink-0">
+        {/* Mobile/Tablet Layout */}
+        <div className="flex items-center justify-between lg:hidden">
+          <button
+            onClick={toggleSidebar}
+            className={`p-2 rounded-md hover:bg-gray-100 transition-all duration-300 ${themeStyles.primary.color}`}
+            aria-label="Toggle sidebar"
+          >
+            <FaBars size={18} />
+          </button>
+          
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={() => dispatch(toggleTheme())}
               className={`p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 ${themeStyles.primary.color}`}
               aria-label="Toggle theme"
             >
               {currentTheme === "light" ? (
-                <FaSun className="text-yellow-500" size={18} />
+                <FaSun className="text-yellow-500" size={16} />
               ) : (
                 <FaMoon
                   className={`text-gray-500 ${themeStyles.text.color}`}
-                  size={18}
+                  size={16}
                 />
               )}
             </button>
             <button className="p-1 flex items-center justify-center relative">
               <FaUserCircle
-                size={22}
+                size={20}
                 className={`text-blue-600 ${themeStyles.text.color}`}
               />
-              <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-[10px] leading-none flex items-center justify-center rounded-full w-4 h-4 font-bold">
+              <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-[9px] leading-none flex items-center justify-center rounded-full w-3.5 h-3.5 font-bold">
                 3
               </span>
             </button>
           </div>
+        </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden lg:block">
+          <button
+            onClick={toggleSidebar}
+            className={`absolute top-1/4 text-primary-navy p-2 rounded-md hover:bg-gray-100 transition-all duration-300 left-4 ${themeStyles.primary.color}`}
+            aria-label="Toggle sidebar"
+          >
+            <FaBars size={18} />
+          </button>
+          <div className="w-full flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            {/* Left: Breadcrumb + Nav */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2">
+                <Breadcrumb
+                  items={
+                    basicBreadcrumbs[currentPath] || basicBreadcrumbs.dashboard
+                  }
+                  className={`mr-3 ${themeStyles.text.color}`}
+                />
+              </div>
+              <div className="mt-2 md:mt-3">
+                <nav className="flex gap-2 sm:gap-4 overflow-x-auto">
+                  {basicMenuItems.map((item) => {
+                    return (
+                      <button
+                        key={item.path}
+                        onClick={() => navigate(item.path)}
+                        className={`hover:text-primary border-b-2 border-secondary whitespace-nowrap text-xs lg:text-base pb-1 px-1 sm:px-2 ${
+                          themeStyles.primary.color
+                        } ${
+                          isTopNavItemActive(item.path)
+                            ? `border-opacity-50 ${themeStyles.primary.color} font-semibold`
+                            : `border-opacity-35 text-gray-500`
+                        }`}
+                      >
+                        {item.label}
+                      </button>
+                    );
+                  })}
+                </nav>
+              </div>
+            </div>
+
+            {/* Right: Actions */}
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <button
+                onClick={() => dispatch(toggleTheme())}
+                className={`p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 ${themeStyles.primary.color}`}
+                aria-label="Toggle theme"
+              >
+                {currentTheme === "light" ? (
+                  <FaSun className="text-yellow-500" size={18} />
+                ) : (
+                  <FaMoon
+                    className={`text-gray-500 ${themeStyles.text.color}`}
+                    size={18}
+                  />
+                )}
+              </button>
+              <button className="p-1 flex items-center justify-center relative">
+                <FaUserCircle
+                  size={22}
+                  className={`text-blue-600 ${themeStyles.text.color}`}
+                />
+                <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-[10px] leading-none flex items-center justify-center rounded-full w-4 h-4 font-bold">
+                  3
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Navigation Menu */}
+        <div className="lg:hidden mt-2">
+          <nav className="flex gap-1 sm:gap-2 overflow-x-auto pb-1">
+            {basicMenuItems.map((item) => {
+              return (
+                <button
+                  key={item.path}
+                  onClick={() => navigate(item.path)}
+                  className={`hover:text-primary border-b-2 border-secondary whitespace-nowrap text-xs sm:text-sm pb-1 px-2 ${
+                    themeStyles.primary.color
+                  } ${
+                    isTopNavItemActive(item.path)
+                      ? `border-opacity-50 ${themeStyles.primary.color} font-semibold`
+                      : `border-opacity-35 text-gray-500`
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </nav>
         </div>
       </div>
     </div>

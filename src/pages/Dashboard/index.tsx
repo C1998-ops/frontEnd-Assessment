@@ -75,7 +75,7 @@ const Dashboard: React.FC = () => {
       {/* Parallax Hero Section */}
       <ParallaxHero
         title="Welcome to Your Dashboard"
-        subtitle="Mind your business , updated with real-time analytics"
+        subtitle="Monitor your business , updated with real-time analytics"
       />
 
       {/* Main Dashboard Content */}
